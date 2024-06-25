@@ -20,5 +20,5 @@ const buildRows = () => {
     return packagedRows;
 }
 
-buildRows();
+// buildRows();
 export { buildRows };

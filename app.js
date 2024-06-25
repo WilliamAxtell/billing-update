@@ -1,7 +1,7 @@
 import express from 'express';
 import {router} from './routes/billings.js';
-import {queue} from './controllers/billings.js';
 import schedule from 'node-schedule';
+import { insertRows } from './functions/insert-rows.js';
 const app = express();
 
 // middleware
@@ -18,9 +18,8 @@ const start = async () => {
         app.listen(port, () => {
           console.log(`Server is running on port ${port}`);
         });
-        schedule.scheduleJob('0 3 * * *', function(){
-          console.log('Queue:');
-          queue.print();
+        schedule.scheduleJob('*/5 * * * *'/*'0 3 * * *'*/, function(){
+          insertRows();
         });
         console.log('Job scheduled');
       } catch (err) {

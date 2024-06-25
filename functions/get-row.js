@@ -14,7 +14,6 @@ const getRow = async (media) => {
     valueRenderOption: 'FORMATTED_VALUE'
   })
 
-  //console.log(res.data.values.length);
   return res.data.values.length + 1;
 }
 
