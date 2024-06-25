@@ -24,15 +24,23 @@ class CircularQueue {
       this.enqueue(item);
       return;
     }
+    
     if (!this.isFull()) {
       const client = item["client"];
       let i;
-      for (i = this.front; i !== this.rear + 1; i = (i + 1) % this.capacity) {
+      
+      for (i = this.front; i !== this.rear; i = (i + 1) % this.capacity) {
         if (this.items[i]["client"] === client) {
           this.items[i]["billing"] = item["billing"];
           return;
         }
       }
+
+      if (this.items[i]["client"] === client) {
+        this.items[i]["billing"] = item["billing"];
+        return;
+      }
+      
       this.enqueue(item);
     } else {
     console.log("Queue is full");
@@ -89,13 +97,17 @@ class CircularQueue {
 
 export {CircularQueue};
 
-// const queue = new CircularQueue(50);
+// const queue = new CircularQueue(5);
 // queue.insert({ client: 'bill', billing: '100' });
 // queue.insert({ client: 'clam', billing: '200' });
 // queue.insert({ client: 'felt', billing: '300' });
+// queue.insert({ client: 'gumo', billing: '400' });
+// queue.insert({ client: 'replo', billing: '500' });
 // console.log(queue.peek());
 // queue.print();
 // queue.insert({ client: 'felt', billing: '400' });
 // queue.print();
 // queue.dequeue();
+// queue.insert({ client: 'update', billing: '100' });
+// console.log(queue.items);
 // queue.print();
